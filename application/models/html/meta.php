@@ -28,4 +28,19 @@ class Meta extends MY_Model
             return $this->project_name;
         }
     }
+    
+    public function getLanguageCode()
+    {
+        return 'en';
+    }
+    
+    public function getDescription()
+    {
+        return "website_meta_description";
+    }
+    
+    public function getAuthor()
+    {
+        return "David Schneider";
+    }
 }

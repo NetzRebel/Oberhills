@@ -45,6 +45,13 @@ class Visitor extends MY_Model
      */
     public function isLoggedIn()
     {
+        if(isset($this->UserData['isLoggedIn']))
+        {
+            if($this->UserData['isLoggedIn'])
+            {
+                return true;
+            }
+        }
         return false;
     }
     
@@ -57,7 +64,7 @@ class Visitor extends MY_Model
     public function register()
     {
         $this->load->model('auth/Registration');
-        $this->Registration->validate();
+        $this->Registration->create();
     }
     
     /*
@@ -96,11 +103,8 @@ class Visitor extends MY_Model
     
     public function load()
     {   
-        if($this->isLoggedIn())
-        {
-            $this->UserData = $this->session->userdata('UserData');
-        }
-        else
+        $this->UserData = $this->session->userdata('UserData');
+        if(!$this->UserData)
         {
             // generate user data and update session storage
             $this->UserData = array(
@@ -110,6 +114,11 @@ class Visitor extends MY_Model
         }
     }
     
+    public function logout()
+    {
+        $this->session->unset_userdata('UserData');
+    }
+
     public function update()
     {
         $this->session->set_userdata('UserData', $this->UserData);

@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="<?php echo $this->HTMLDOC->Meta->getLanguageCode(); ?>">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
+    <meta name="description" content="<?php echo $this->HTMLDOC->Meta->getDescription(); ?>">
+    <meta name="author" content="<?php echo $this->HTMLDOC->Meta->getAuthor(); ?>">
     <title><?php echo $this->HTMLDOC->Meta->getTitle(); ?></title>
     <?php echo $this->assetor->generate('header'); ?>
 
@@ -31,23 +31,18 @@
           <a class="navbar-brand" href="#">Oberhills</a>
         </div>
         <div class="collapse navbar-collapse">
-          <ul class="nav navbar-nav">
-            <li class="active"><a href="#">Home</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#contact">Contact</a></li>
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <span class="caret"></span></a>
-              <ul class="dropdown-menu" role="menu">
-                <li><a href="#">Action</a></li>
-                <li><a href="#">Another action</a></li>
-                <li><a href="#">Something else here</a></li>
-                <li class="divider"></li>
-                <li class="dropdown-header">Nav header</li>
-                <li><a href="#">Separated link</a></li>
-                <li><a href="#">One more separated link</a></li>
-              </ul>
+          <ul class="nav navbar-nav pull-right"><?php if($this->Visitor->isLoggedIn()) : ?>
+            <li>
+              <?php echo anchor('logout', lang('navbar_logout_link')); ?>
             </li>
-          </ul>
+          <?php else : ?>
+            <li>
+              <?php echo anchor('signup', lang('navbar_signup_link')); ?>
+            </li>
+            <li>
+              <?php echo anchor('login', lang('navbar_login_link')); ?>
+            </li>
+          <?php endif; ?></ul>
         </div><!--/.nav-collapse -->
       </div>
     </div>
@@ -77,5 +72,14 @@
         <p class="text-muted">Place sticky footer content here.</p>
     </div>
     <?php echo $this->assetor->generate('footer'); ?>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            if(!Modernizr.inputtypes.date) {
+                $('.datepicker').each(function(){
+                    $(this).datepicker();
+                });
+            }
+        });
+    </script>
   </body>
 </html>

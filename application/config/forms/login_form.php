@@ -3,7 +3,7 @@
 $config['form'] = array(
     'attributes' => array(
         'class' => 'form-horizontal',
-        'action' => 'auth/login',
+        'action' => 'login',
         'role' => 'form'
     ),
     'hidden' => array(),

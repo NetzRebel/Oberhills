@@ -19,6 +19,16 @@ class Form extends MY_Model
     {
         if(!$this->FormName) throw new Exception ("No form loaded");
         $html = render_form($this->FormConfig);
+        if(isset($this->FormConfig['scripts']))
+        {
+            foreach($this->FormConfig['scripts'] as $location => $scripts)
+            {
+                foreach($scripts as $file)
+                {
+                    $this->assetor->load($file, $location);
+                }
+            }
+        }
         return $html;
     }
     

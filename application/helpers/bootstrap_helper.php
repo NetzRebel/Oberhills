@@ -21,7 +21,7 @@ function render_form_head($attributes)
     {
         $attributes['method'] = 'post';
     }
-    // make sure the action attribute is there
+    // make sure the action attribute is not there
     if(array_key_exists('action', $attributes))
     {
         $attributes['action'] = site_url($attributes['action']);
@@ -30,12 +30,7 @@ function render_form_head($attributes)
     {
         $attributes['action'] = current_url();
     }
-    // build the head
-    $form_head = PHP_EOL
-        . '<form'
-        . render_attribute_string($attributes)
-        . '>';
-    return $form_head;
+    return form_open($attributes['action'], $attributes);
 }
 
 // render hidden inputs

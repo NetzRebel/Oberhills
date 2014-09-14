@@ -8,6 +8,9 @@ $config['css_files'] = array(
     )
 );
 $config['js_files'] = array(
+    'header' => array(
+        'modernizr-latest.js'
+    ),
     'footer' => array(
         '//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js',
         'bootstrap.min.js'

@@ -39,8 +39,11 @@
 */
 
 $route['default_controller'] = "pages/lander";
-$route['404_override'] = '';
+$route['404_override'] = "pages/not_found";
 
+$route['signup'] = "auth/signup";
+$route['login'] = "auth/login";
+$route['logout'] = "auth/logout";
 
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */

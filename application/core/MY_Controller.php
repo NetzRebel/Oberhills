@@ -8,6 +8,17 @@ class MY_Controller extends CI_Controller
     {
         parent::__construct();
         
+        // development stuff
+//        if(ENVIRONMENT=="development")
+//        {
+//            // check migration status
+            $this->load->library('migration');
+            if (!$this->migration->latest())
+            {
+                show_error($this->migration->error_string());
+            }
+//        }
+        
         // prepare models
         $this->load->model('Visitor');
         $this->load->model('html/doc','HTMLDOC');
@@ -16,6 +27,7 @@ class MY_Controller extends CI_Controller
         $language = $this->Visitor->get('language');
         $controller = strtolower(get_class($this));
         $this->lang->load($controller, $language);
+        $this->lang->load('common', $language);
         
         // load template config
         $this->config->load('template');

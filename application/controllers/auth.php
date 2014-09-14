@@ -42,9 +42,21 @@ class Auth extends MY_Controller
         $this->display('auth/login', $view_data);
     }
     
+    public function logout()
+    {
+        // no need to logout twice
+        if(!$this->Visitor->isLoggedIn())
+        {
+            redirect('/', 'refresh');
+        }
+        $this->Visitor->logout();
+        $this->Visitor->sendMessage(lang('auth_logout_successful'));
+        redirect('/', 'refresh');
+    }
+    
     public function signup()
     {
-        // no need to login twice
+        // no need to signup twice
         if($this->Visitor->isLoggedIn())
         {
             redirect('/', 'refresh');
@@ -61,7 +73,8 @@ class Auth extends MY_Controller
             {
                 $this->Form->validate();
                 $this->Visitor->register();
-                redirect('/', 'refresh');
+                $this->display('auth/signup_success');
+                return;
             }
             catch (Exception $ex)
             {
